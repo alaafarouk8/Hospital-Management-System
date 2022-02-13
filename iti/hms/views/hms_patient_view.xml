@@ -1,0 +1,58 @@
+<odoo>
+    <data>
+        <record id="hms_patient_action" model="ir.actions.act_window">
+            <field name="name">Patients</field>
+            <field name="res_model">hms.patient</field>
+        </record>
+        <menuitem id="hms_patient_root_menu" name="Patients"/>
+        <menuitem id="hms_patient_menu" parent="hms_patient_root_menu" action="hms_patient_action"/>
+        <record id="hms_patient_form_tree_view" model="ir.ui.view">
+            <field name="name">Patient</field>
+            <field name="model">hms.patient</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="firstname"/>
+                    <field name="lastname"/>
+                    <field name="email"/>
+                    <field name="age"/>
+                    <field name="department_id"/>
+                    <field name="doctor_id"/>
+                    <field name="state"/>
+                </tree>
+            </field>
+        </record>
+        <record id="hms_patient_form_view" model="ir.ui.view">
+            <field name="name">Patient</field>
+            <field name="model">hms.patient</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <field name="firstname"/>
+                            <field name="lastname"/>
+                            <field name="email"/>
+                            <field name="birthdate"/>
+                            <field name="department_id" domain="[('is_opened','=',True)]"/>
+                            <field name="capacity"/>
+                            <field name="Blood"/>
+                            <field name="PCR"/>
+                            <field name="crRatio" attrs="{'required': [('PCR','=',True)]}"/>
+                            <field name="image"/>
+                            <field name="address"/>
+                            <field name="age"/>
+                            <field name="state"/>
+                            <field name="history" attrs="{'invisible': [('age','&lt;','50')]}"/>
+                            <field name="doctor_id" widget="many2many_tags"
+                                   attrs="{'readonly': [('department_id','=',False)]}"/>
+                            <notebook>
+                                <page string="History Log">
+                                    <field name="log_id" string="Patient History log"/>
+                                </page>
+                            </notebook>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+    </data>
+</odoo>
