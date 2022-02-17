@@ -13,11 +13,10 @@
                                 <field name="lastname"/>
                                 <field name="image" widget="image"/>
 
-
                     </tree>
                 </field>
         </record>
-        <menuitem id ="hms_doctor_menu" parent="hms_patient_root_menu" action="hms_doctor_action"/>
+        <menuitem id ="hms_doctor_menu" groups="hms_manager_group" parent="hms_patient_root_menu" action="hms_doctor_action"/>
           <record id="hms_doctor_form_view" model="ir.ui.view">
                 <field name="name">Doctors</field>
                 <field name="model">hms.doctors</field>
